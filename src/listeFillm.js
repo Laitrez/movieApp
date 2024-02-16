@@ -31,7 +31,13 @@ function ListeFillm() {
     <>
       <Row>
         <Col>
-      n 
+          <Form.Control
+            size="lg"
+            type="text"
+            placeholder="toto"
+            value={searchTerm}
+            onChange={Recherche}
+          />
         </Col>
       </Row>
       <div className="d-flex flex-wrap justify-content-center">
