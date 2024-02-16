@@ -1,17 +1,15 @@
-import logo from "./logo.svg";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import Search from "./searchB";
+// import SearchBox from "./searchB";
 import Footer from "./footer";
-import ListeFilm from "./listeFillm";
+import ListeFillm from "./listeFillm";
 
 function App() {
   return (
     <div className="App">
-      <div>
-        <Search />
-      </div>
+      <div>{/* <Search /> */}</div>
       <main>
-        <ListeFilm />
+        <ListeFillm />
       </main>
       <footer>
         <Footer />
