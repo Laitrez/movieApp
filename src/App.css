@@ -1,5 +1,12 @@
 .App {
   text-align: center;
+  height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  height: 100%;
 }
 
 .App-logo {

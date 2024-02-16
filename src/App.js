@@ -1,19 +1,17 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-// import SearchBox from "./searchB";
-import Footer from "./footer";
-import ListeFillm from "./listeFillm";
+import SearchBar from "./components/SearchBar/searchBar";
+import Films from "./components/films";
+import Footer from "./layouts/footer";
 
 function App() {
   return (
     <div className="App">
-      <div>{/* <Search /> */}</div>
+      <SearchBar />
       <main>
-        <ListeFillm />
+        <Films />
       </main>
-      <footer>
-        <Footer />
-      </footer>
+      <Footer />
     </div>
   );
 }
