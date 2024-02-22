@@ -11,11 +11,11 @@ function App() {
       <div className="App">
         <SearchBar />
         <main>
-          <Films />
           <div className="d-flex">
             <BPrev />
             <BNext />
           </div>
+          <Films />
         </main>
       </div>
       <footer>

@@ -7,7 +7,7 @@ function Carte({ img, titre, desc }) {
   return (
     <Card style={{ width: "20rem" }}>
       {/* <Card> */}
-      <Card.Img variant="top" src={`https://image.tmdb.org/t/p/w200${img}`} />
+      <Card.Img variant="top" src={`https://image.tmdb.org/t/p/w1280${img}`} />
       <Card.Body>
         <Card.Title>{titre}</Card.Title>
         <Card.Text>{desc}</Card.Text>

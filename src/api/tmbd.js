@@ -16,11 +16,11 @@ export const get = async (value, page) => {
   }
 };
 
-export const getTrend = async () => {
+export const getTrend = async (page) => {
   try {
     const response = await axios.get(
       //   `https://api.themoviedb.org/3/trending/movie/day?api_key=${apiKey}&query=${value}`
-      `https://api.themoviedb.org/3/trending/movie/day?api_key=${apiKey}`
+      `https://api.themoviedb.org/3/trending/movie/day?api_key=${apiKey}&page=${page}`
     );
 
     //   setMovies(response.data.results);

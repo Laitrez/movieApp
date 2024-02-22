@@ -23,6 +23,22 @@ function ListeFillm() {
 
 */
 
+  async function fetchMovie(searchTerme, page) {
+    try {
+      let fetchedMovies;
+      if (searchTerme) {
+        fetchedMovies = await tmbd.get(searchTerme, page);
+      } else {
+        page === undefined
+          ? (fetchedMovies = await tmbd.getTrend(1))
+          : (fetchedMovies = await tmbd.getTrend(page));
+      }
+      setMovies(fetchedMovies);
+      setError(false);
+    } catch (error) {
+      setError(true);
+    }
+  }
   useEffect(() => {
     // -----------------------------------
     // const unsubscribe = store.subscribe(async () => {
@@ -36,24 +52,10 @@ function ListeFillm() {
 
     // -----------------------------------------
     // solution avec l'appel au demarrage de la trend :
-    async function fetchMovie(searchTerme, page) {
-      try {
-        let fetchedMovies;
-        if (searchTerme) {
-          fetchedMovies = await tmbd.get(searchTerme, page);
-        } else {
-          fetchedMovies = await tmbd.getTrend();
-        }
-        setMovies(fetchedMovies);
-        setError(false);
-      } catch (error) {
-        setError(true);
-      }
-    }
 
     const unsubscribe = store.subscribe(() => {
-      const { value } = store.getState().search;
-      const { page } = store.getState().search;
+      const { value, page } = store.getState().search;
+      // const { page } = store.getState().search;
       fetchMovie(value, page);
     });
     fetchMovie("");
