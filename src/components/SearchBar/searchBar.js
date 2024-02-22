@@ -4,12 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { set } from "./searchBar.reducer";
 
 const SearchBox = () => {
-  const value = useSelector((state) => state.search.value)
-  const dispatch = useDispatch()
+  const value = useSelector((state) => state.search.value);
+  const dispatch = useDispatch();
 
-  const handleChange = (event) => {
-    console.log(event.target.value)
-  };
+  // const handleChange = (event) => {
+  //   console.log(event.target.value)
+  // };
 
   return (
     <>

@@ -1,18 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export const searchBarReducer = createSlice({
-    name: 'search',
-    initialState: {
-        value: ''
+  name: "search",
+  initialState: {
+    value: "",
+    page: 1,
+  },
+  reducers: {
+    set: (state, { payload }) => {
+      state.value = payload;
+      state.page= payload.page
     },
-    reducers: {
-        set: (state, { payload }) => {
-            state.value = payload
-        }
-    }
-})
+    setP: (state, { payload }) => {
+      state.page = payload.page;
+    },
+  },
+});
 
 // Action creators are generated for each case reducer function
-export const { set } = searchBarReducer.actions
+export const { set, setP } = searchBarReducer.actions;
 
-export default searchBarReducer.reducer
+export default searchBarReducer.reducer;

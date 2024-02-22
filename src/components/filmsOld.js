@@ -4,7 +4,6 @@ import store from "../store";
 import * as tmbd from "../api/tmbd";
 import Carte from "./card";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { set } from "./SearchBar/searchBar.reducer";
 
 function ListeFillm() {
   const [movies, setMovies] = useState([]);
@@ -25,73 +24,46 @@ function ListeFillm() {
 
   useEffect(() => {
     // -----------------------------------
-    // const unsubscribe = store.subscribe(async () => {
-    //   const { value } = store.getState().search;
+    const unsubscribe = store.subscribe(async () => {
+      const { value } = store.getState().search;
 
-    /*
+      /*
       // Gestion de l'erreur ??
       const v = await tmbd.get(value)
       setMovies(v)
       */
-
-    // -----------------------------------------
-    // solution avec l'appel au demarrage de la trend :
-    async function fetchMovie(searchTerme, page) {
-      try {
-        let fetchedMovies;
-        if (searchTerme) {
-          fetchedMovies = await tmbd.get(searchTerme, page);
-        } else {
-          fetchedMovies = await tmbd.getTrend();
-        }
-        setMovies(fetchedMovies);
-        setError(false);
-      } catch (error) {
-        setError(true);
+      // gestion trending page vide :
+      // --------------------------------------------
+      if (value) {
+        tmbd
+          .get(value)
+          .then((movies) => {
+            if (error) setError(false);
+            setMovies(movies);
+          })
+          .catch((e) => setError(true));
+      } else {
+        tmbd
+          .getTrend()
+          .then((movies) => {
+            if (error) setError(false);
+            setMovies(movies);
+          })
+          .catch((e) => setError(true));
       }
-    }
 
-    const unsubscribe = store.subscribe(() => {
-      const { value } = store.getState().search;
-      const { page } = store.getState().search;
-      fetchMovie(value, page);
+      //existant -------------------------
+      // tmbd
+      //   .get(value)
+      //   .then((movies) => {
+      //     if (error) setError(false);
+      //     setMovies(movies);
+      //   })
+      //   .catch((e) => setError(true));
     });
-    fetchMovie("");
+
     return () => unsubscribe();
-  }, []);
-  // -----------------------------------------
-  // gestion trending page vide :
-  // --------------------------------------------
-  // if (value) {
-  //   tmbd
-  //     .get(value)
-  //     .then((movies) => {
-  //       if (error) setError(false);
-  //       setMovies(movies);
-  //     })
-  //     .catch((e) => setError(true));
-  // } else {
-  //   tmbd
-  //     .getTrend()
-  //     .then((movies) => {
-  //       if (error) setError(false);
-  //       setMovies(movies);
-  //     })
-  //     .catch((e) => setError(true));
-  // }
-
-  //existant -------------------------
-  // tmbd
-  //   .get(value)
-  //   .then((movies) => {
-  //     if (error) setError(false);
-  //     setMovies(movies);
-  //   })
-  //   .catch((e) => setError(true));
-  // });
-
-  //   return () => unsubscribe();
-  // });
+  });
 
   // COmposant Movie
   const Movie = ({ movie }) => {
@@ -139,3 +111,82 @@ function ListeFillm() {
 }
 
 export default ListeFillm;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
