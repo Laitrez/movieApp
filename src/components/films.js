@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import store from "../store";
 import * as tmbd from "../api/tmbd";
+import Card from "./card";
 
 function ListeFillm() {
   const [movies, setMovies] = useState([]);
@@ -35,10 +36,6 @@ function ListeFillm() {
         setMovies(movies)
       }).catch(e => setError(true))
 
-
-
-
-
     })
 
     return () => unsubscribe()
@@ -49,20 +46,7 @@ function ListeFillm() {
   const Movie = ({ movie }) => {
     return (
       <div className="m-5 w-25">
-        <div className="card d-flex w-50">
-          <img
-            className="card-img-top w-100"
-            src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
-            alt={movie.title}
-          />
-          <div className="card-body">
-            <h5 className="card-title">{movie.title}</h5>
-            <p className="card-text"></p>
-            <a href="#" className="btn btn-primary">
-              Details
-            </a>
-          </div>
-        </div>
+        <Card {...movie} />
       </div>
     );
   }
