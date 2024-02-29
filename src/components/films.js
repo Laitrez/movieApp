@@ -1,33 +1,23 @@
 import React, { useEffect, useState } from "react";
-// import axios from "axios";
 import store from "../store";
 import * as tmbd from "../api/tmbd";
 import Carte from "./card";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { set } from "./SearchBar/searchBar.reducer";
 
 function ListeFillm() {
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(false);
-  // var page = 1;
+  // test context----------------------------------------
 
-  /*
-
-  // Method 1
-  const search = useSelector((state) => state.search.value)
-
-  
-  useEffect(() => {
-    console.log('search', search)
-  }, [search ]) // Maj quand cette variable change !
-
-*/
-
-  async function fetchMovie(searchTerme, page) {
+  async function fetchMovie(searchTerme, page, context) {
     try {
       let fetchedMovies;
       if (searchTerme) {
-        fetchedMovies = await tmbd.get(searchTerme, page);
+        fetchedMovies = await tmbd.get(searchTerme, page, context);
+      } else if (context) {
+        page === undefined
+          ? (fetchedMovies = await tmbd.getTrendCont(1, context))
+          : (fetchedMovies = await tmbd.getTrendCont(page, context));
       } else {
         page === undefined
           ? (fetchedMovies = await tmbd.getTrend(1))
@@ -39,80 +29,52 @@ function ListeFillm() {
       setError(true);
     }
   }
+  // test context----------------------------------------
+  //
+  // legacy---------------------------------------------------
+  // async function fetchMovie(searchTerme, page) {
+  //   try {
+  //     let fetchedMovies;
+  //     if (searchTerme) {
+  //       fetchedMovies = await tmbd.get(searchTerme, page);
+  //     } else {
+  //       page === undefined
+  //         ? (fetchedMovies = await tmbd.getTrend(1))
+  //         : (fetchedMovies = await tmbd.getTrend(page));
+  //     }
+  //     setMovies(fetchedMovies);
+  //     setError(false);
+  //   } catch (error) {
+  //     setError(true);
+  //   }
+  // }
+  // legacy---------------------------------------------------
   useEffect(() => {
-    // -----------------------------------
-    // const unsubscribe = store.subscribe(async () => {
-    //   const { value } = store.getState().search;
-
-    /*
-      // Gestion de l'erreur ??
-      const v = await tmbd.get(value)
-      setMovies(v)
-      */
-
-    // -----------------------------------------
     // solution avec l'appel au demarrage de la trend :
 
     const unsubscribe = store.subscribe(() => {
-      const { value, page } = store.getState().search;
+      const { value, page, context } = store.getState().search;
       // const { page } = store.getState().search;
-      fetchMovie(value, page);
+      fetchMovie(value, page, context);
     });
     fetchMovie("");
     return () => unsubscribe();
   }, []);
-  // -----------------------------------------
-  // gestion trending page vide :
-  // --------------------------------------------
-  // if (value) {
-  //   tmbd
-  //     .get(value)
-  //     .then((movies) => {
-  //       if (error) setError(false);
-  //       setMovies(movies);
-  //     })
-  //     .catch((e) => setError(true));
-  // } else {
-  //   tmbd
-  //     .getTrend()
-  //     .then((movies) => {
-  //       if (error) setError(false);
-  //       setMovies(movies);
-  //     })
-  //     .catch((e) => setError(true));
-  // }
+  // useEffect(() => {
+  //   // solution avec l'appel au demarrage de la trend :
 
-  //existant -------------------------
-  // tmbd
-  //   .get(value)
-  //   .then((movies) => {
-  //     if (error) setError(false);
-  //     setMovies(movies);
-  //   })
-  //   .catch((e) => setError(true));
-  // });
-
+  //   const unsubscribe = store.subscribe(() => {
+  //     const { value, page } = store.getState().search;
+  //     // const { page } = store.getState().search;
+  //     fetchMovie(value, page);
+  //   });
+  //   fetchMovie("");
   //   return () => unsubscribe();
-  // });
-
-  // COmposant Movie
+  // }, []);
+  // legacy---------------------------------------------------
   const Movie = ({ movie }) => {
     return (
       <div className="d-flex flex-wrap m-5 w-25 overflow-hidden">
-        {/* <div className="card d-flex w-50">
-          <img
-            className="card-img-top w-100"
-            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-            alt={movie.title}
-          />
-          <div className="card-body">
-            <h5 className="card-title">{movie.title}</h5>
-            <p className="card-text"></p>
-            <a href="#" className="btn btn-primary">
-              Details
-            </a>
-          </div>
-        </div> */}
         <Carte
           gap
           img={movie.poster_path}

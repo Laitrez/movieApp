@@ -6,24 +6,32 @@ import {
   faTv,
   faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
+import context from "react-bootstrap/esm/AccordionContext";
+import { useDispatch } from "react-redux";
+import { setC } from "../components/SearchBar/searchBar.reducer";
 
 const Footer = () => {
+  const dispatch = useDispatch();
   const data = [
     {
       icon: faFire,
       name: "Trending",
+      context: "trending",
     },
     {
       icon: faFilm,
       name: "Movies",
+      context: "movie",
     },
     {
       icon: faTv,
       name: "TV Series",
+      context: "tv",
     },
     {
       icon: faMagnifyingGlass,
       name: "Search",
+      context: "trending",
     },
   ];
   return (
@@ -33,12 +41,15 @@ const Footer = () => {
           <div className="col-12 text-center bg-dark footer">
             {data.map((val) => {
               return (
-                  <button className="col-sm-2 col-md-2 btn btn-dark" key={val.name}>
-                    <FontAwesomeIcon icon={val.icon} size="3x" />
-                    <br />
-                    <h5 className="pt-1 fs-6">{val.name}</h5>
-                  </button>
-                  
+                <button
+                  className="col-sm-2 col-md-2 btn btn-dark"
+                  key={val.name}
+                  onClick={() => dispatch(setC(val.context))}
+                >
+                  <FontAwesomeIcon icon={val.icon} size="3x" />
+                  <br />
+                  <h5 className="pt-1 fs-6">{val.name}</h5>
+                </button>
               );
             })}
           </div>

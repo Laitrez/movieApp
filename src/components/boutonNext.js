@@ -8,11 +8,19 @@ export const BNext = () => {
   let page = useSelector((state) => state.search.page);
   const dispatch = useDispatch();
   useEffect(() => console.log(page));
-  let payload={
-    pageTest:page+1,
-    pageMax:10,
-  }
-  return <Button page={page} onClick={() => dispatch(setP(payload))} />;
+  let payload = {
+    pageTest: page + 1,
+    pageMax: 10,
+  };
+  return (
+    <Button
+      className="gap-3"
+      page={page}
+      onClick={() => dispatch(setP(payload))}
+    >
+      NEXT
+    </Button>
+  );
 };
 
 //
@@ -20,8 +28,16 @@ export const BPrev = () => {
   let page = useSelector((state) => state.search.page);
   const dispatch = useDispatch();
   let pagination = {
-    pageTest: page-1,
+    pageTest: page - 1,
     pageMax: 10,
   };
-  return <Button page={page} onClick={() => dispatch(setP(pagination))} />;
+  return (
+    <Button
+      className="gap-3"
+      page={page}
+      onClick={() => dispatch(setP(pagination))}
+    >
+      PREV
+    </Button>
+  );
 };

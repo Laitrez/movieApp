@@ -11,7 +11,7 @@ function App() {
       <div className="App">
         <SearchBar />
         <main>
-          <div className="d-flex">
+          <div className="d-flex gap-3 justify-content-center">
             <BPrev />
             <BNext />
           </div>
