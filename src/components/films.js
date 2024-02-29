@@ -3,10 +3,13 @@ import store from "../store";
 import * as tmbd from "../api/tmbd";
 import Carte from "./card";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { stock } from "./SearchBar/carousel.reducer";
+import { useDispatch, useSelector } from "react-redux";
 
 function ListeFillm() {
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(false);
+  const dispatch = useDispatch();
   // test context----------------------------------------
 
   async function fetchMovie(searchTerme, page, context) {
@@ -24,6 +27,7 @@ function ListeFillm() {
           : (fetchedMovies = await tmbd.getTrend(page));
       }
       setMovies(fetchedMovies);
+      dispatch(stock(fetchedMovies));
       setError(false);
     } catch (error) {
       setError(true);
