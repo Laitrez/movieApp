@@ -34,7 +34,7 @@ export const getTrendCont = async (page, context) => {
   try {
     const response = await axios.get(
       //   `https://api.themoviedb.org/3/trending/movie/day?api_key=${apiKey}&query=${value}`
-      `https://api.themoviedb.org/3/trending/${context}/day?api_key=${apiKey}&page=${page}`
+      `https://api.themoviedb.org/3/${context}/movie/day?api_key=${apiKey}&page=${page}`
     );
 
     //   setMovies(response.data.results);
