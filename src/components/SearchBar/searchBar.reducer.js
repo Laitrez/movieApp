@@ -5,7 +5,7 @@ export const searchBarReducer = createSlice({
   initialState: {
     value: "",
     page: 1,
-    context: "trending",
+    context: "all",
   },
   reducers: {
     set: (state, { payload }) => {

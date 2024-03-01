@@ -17,7 +17,9 @@ const Carroussel = () => {
     <Carousel style={{ width: "100%", height: "20%" }}>
       {lFilm.map((movie) => (
         <Carousel.Item>
-          <img src={`https://image.tmdb.org/t/p/w1280/${movie.backdrop_path}`} />
+          <img
+            src={`https://image.tmdb.org/t/p/w1280/${movie.backdrop_path}`}
+          />
           <Carousel.Caption>
             <h3>{movie.title}</h3>
             <p>{movie.overlay}</p>

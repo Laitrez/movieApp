@@ -16,7 +16,7 @@ const Footer = () => {
     {
       icon: faFire,
       name: "Trending",
-      context: "trending",
+      context: "all",
     },
     {
       icon: faFilm,
@@ -31,7 +31,7 @@ const Footer = () => {
     {
       icon: faMagnifyingGlass,
       name: "Search",
-      context: "trending",
+      context: "all",
     },
   ];
   return (

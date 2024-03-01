@@ -13,7 +13,7 @@ function App() {
         <SearchBar />
         <main>
           <div>
-          <Carroussel />
+            <Carroussel />
           </div>
           <div className="d-flex gap-3 justify-content-center">
             <BPrev />
