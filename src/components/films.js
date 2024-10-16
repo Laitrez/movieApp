@@ -78,7 +78,7 @@ function ListeFillm() {
         <Carte
           gap
           img={movie.poster_path}
-          titre={movie.title}
+          titre={movie.title?movie.title:movie.name}
           desc={movie.overlay}
         />
       </div>
